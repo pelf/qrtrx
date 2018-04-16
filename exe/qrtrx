@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'qrtrx'
+Qrtrx::Server.new.start

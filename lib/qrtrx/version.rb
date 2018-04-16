@@ -1,0 +1,3 @@
+module Qrtrx
+  VERSION = "0.1.0"
+end
