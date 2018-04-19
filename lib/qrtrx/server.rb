@@ -1,6 +1,7 @@
 require 'rqrcode'
 require 'socket'
 require 'securerandom'
+require 'mimemagic'
 
 module Qrtrx
   class Server
@@ -17,7 +18,6 @@ module Qrtrx
       socket = server.accept
 
       file_path = File.join(Dir.pwd, file_name)
-
       File.open(file_path, "rb") do |file|
         socket.print http_header(file)
         IO.copy_stream(file, socket)
@@ -50,14 +50,13 @@ module Qrtrx
 
     def http_header(file)
       "HTTP/1.1 200 OK\r\n" +
-      "Content-Type: #{content_type(file)}\r\n" +
+      "Content-Type: #{content_type}\r\n" +
       "Content-Length: #{file.size}\r\n" +
       "Connection: close\r\n\r\n"
     end
 
-    def content_type(file)
-      # TODO
-      'text/plain'
+    def content_type
+      MimeMagic.by_path(file_name).type
     end
 
   end
