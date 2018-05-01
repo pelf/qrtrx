@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 require 'qrtrx'
-Qrtrx::Server.new.start
+if ARGV.size == 1
+  Qrtrx::Server.new(ARGV.shift).start
+else
+  puts 'Invalid arguments. Example usage: `qrtrx file_to_share.jpg`'
+end

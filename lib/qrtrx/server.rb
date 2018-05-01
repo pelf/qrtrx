@@ -5,8 +5,12 @@ require 'mimemagic'
 
 module Qrtrx
   class Server
-    def initialize(file_name = 'test.txt')
+    def initialize(file_name)
       @file_name = file_name
+      # TODO - check file presence
+      # TODO - support directories (zip?)
+      # TODO - support directories outside the current one?
+      # TODO - readme (with screenshots), reference to original proj
     end
 
     def start
